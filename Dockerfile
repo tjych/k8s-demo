@@ -1,7 +1,7 @@
-FROM registry.cn-beijing.aliyuncs.com/sndks/base_java_centos
+FROM openjdk:7
 MAINTAINER chenhui.yang@yahoo.com
 
-RUN mkdir -p /workspace/webapps/wss_ktv_sndks_com/webapps
-COPY output /workspace/webapps/wss_ktv_sndks_com/webapps
+RUN mkdir -p /workspace/webapps/k8s-demo/webapps
+COPY output /workspace/webapps/k8s-demo/webapps
 
-CMD ["sh","/workspace/webapps/wss_ktv_sndks_com/webapps/bin/start.sh","start"]
+CMD ["sh","/workspace/webapps/k8s-demo/webapps/bin/start.sh","start"]
