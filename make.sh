@@ -12,7 +12,7 @@ GITPROJECTNAME='k8s-demo'
 GITPATH="git@github.com:tjych/${GITPROJECTNAME}.git"
 COMPILE_DIR=${WORKSPACE}/compile
 OUTPUT_DIR="output"
-NAMESPACE="dev";
+NAMESPACE="test";
 PUSHREOMTENAME='birdfiret'
 
 if [[ $# -ge 3 ]] ;then
@@ -22,11 +22,11 @@ if [[ $# -ge 3 ]] ;then
 elif [[ $# -ge 2 ]] ;then
     ACTION=$1;
 	TAG=$2
-	ENV=online
+	ENV=dev
 elif [[ $# -ge 1 ]] ;then
     ACTION=$1;
 	TAG=master
-	ENV=online
+	ENV=dev
 else
     echo "Usage:compile|build|push TAG ENV instanceName";
  	exit 1;
