@@ -1,0 +1,187 @@
+<configuration debug="false" scan="true" scanPeriod="30 seconds">
+    <contextName>${LOCAL_IP}</contextName>
+    <property name="serviceName" value="${log.service.name}"/>
+    <property name="FILE_PATTERN"
+              value=" [%d{yyyy-MM-dd HH:mm:ss.SSS}][%-5level][%thread][%X{CMDID}][%X{UUID}] %logger{0}- %msg%n"/>
+
+    <!--用户行为消息-->
+    <property name="MEMBER_ACTION_FILE_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{logId}] [%X{_room_id}] [%X{_memberid}] %msg - %nopex %n"/>
+
+
+    <property name="FILE_BASE" value="/workspace/logs/service"/>
+    <property name="SERVICE_LOG_FILE_NAME" value="service"/>
+    <property name="DB_LOG_FILE_NAME" value="db"/>
+    <property name="REQUEST_LOG_FILE_NAME" value="${log.service.name}"/>
+    <property resource="log.properties"></property>
+
+    <!-- 程序日志 -->
+    <appender name="debug_fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${FILE_BASE}/${SERVICE_LOG_FILE_NAME}-debug.log</File>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>32MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <fileNamePattern>${FILE_BASE}/archive/${SERVICE_LOG_FILE_NAME}-debug-%d{yyyy-MM-dd}-%i.log.gz
+            </fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- service 日志增加输出日志class的标识logger{0}，为节省长度只输类名 -->
+            <pattern>${FILE_PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <appender name="info_fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${FILE_BASE}/${SERVICE_LOG_FILE_NAME}-info.log</File>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>32MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <fileNamePattern>${FILE_BASE}/archive/${SERVICE_LOG_FILE_NAME}-info-%d{yyyy-MM-dd}-%i.log.gz
+            </fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- service 日志增加输出日志class的标识logger{0}，为节省长度只输类名 -->
+            <pattern>${FILE_PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <appender name="warn_fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${FILE_BASE}/${SERVICE_LOG_FILE_NAME}-warn.log</File>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>32MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <fileNamePattern>${FILE_BASE}/archive/${SERVICE_LOG_FILE_NAME}-warn-%d{yyyy-MM-dd}-%i.log.gz
+            </fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- service 日志增加输出日志class的标识logger{0}，为节省长度只输类名 -->
+            <pattern>${FILE_PATTERN}</pattern>
+        </layout>
+    </appender>
+
+
+
+    <appender name="error_fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${FILE_BASE}/${SERVICE_LOG_FILE_NAME}-error.log</File>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>32MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <fileNamePattern>${FILE_BASE}/archive/${SERVICE_LOG_FILE_NAME}-error-%d{yyyy-MM-dd}-%i.log.gz
+            </fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- service 日志增加输出日志class的标识logger{0}，为节省长度只输类名 -->
+            <pattern>${FILE_PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <appender name="debug_fileAsync" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>12</discardingThreshold>
+        <queueSize>1024</queueSize>
+        <includeCallerData>true</includeCallerData>
+        <appender-ref ref="debug_fileAppender"/>
+    </appender>
+
+    <appender name="info_fileAsync" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>12</discardingThreshold>
+        <queueSize>1024</queueSize>
+        <includeCallerData>false</includeCallerData>
+        <appender-ref ref="info_fileAppender"/>
+    </appender>
+
+    <appender name="warn_fileAsync" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>12</discardingThreshold>
+        <queueSize>1024</queueSize>
+        <includeCallerData>true</includeCallerData>
+        <appender-ref ref="warn_fileAppender"/>
+    </appender>
+
+    <appender name="error_fileAsync" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>12</discardingThreshold>
+        <queueSize>1024</queueSize>
+        <includeCallerData>true</includeCallerData>
+        <appender-ref ref="error_fileAppender"/>
+    </appender>
+
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${FILE_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!--用户行为日志-->
+    <appender name="user_action_info_fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${FILE_BASE}/${SERVICE_LOG_FILE_NAME}-user-action-info.log</File>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>32MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <fileNamePattern>${FILE_BASE}/archive/${SERVICE_LOG_FILE_NAME}-user-action-info-%d{yyyy-MM-dd}-%i.log.gz
+            </fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- service 日志增加输出日志class的标识logger{0}，为节省长度只输类名 -->
+            <pattern>${MEMBER_ACTION_FILE_PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <!-- Logger -->
+    <logger name="kafka" level="WARN" additivity="false">
+        <appender-ref ref="warn_fileAsync"/>
+    </logger>
+
+    <logger name="com.alibaba.dubbo" level="WARN" additivity="false">
+        <appender-ref ref="warn_fileAsync"/>
+    </logger>
+
+    <logger name="org.apache" level="WARN" additivity="false">
+        <appender-ref ref="warn_fileAsync"/>
+    </logger>
+
+    <logger name="org.springframework" level="INFO" additivity="false">
+        <appender-ref ref="info_fileAsync"/>
+        <appender-ref ref="warn_fileAsync"/>
+    </logger>
+
+    <!-- name值可以是包名或具体的类名：该包（包括子包）下的类或该类将采用此logger -->
+    <logger name="com.firebird.k8s.demo" level="${log.level}" additivity="false">
+        <appender-ref ref="debug_fileAsync"/>
+        <appender-ref ref="info_fileAsync"/>
+        <appender-ref ref="warn_fileAsync"/>
+        <appender-ref ref="error_fileAsync"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="user_action_info" level="info" additivity="false">
+        <appender-ref ref="user_action_info_fileAppender"/>
+    </logger>
+
+    <root level="${log.level}">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

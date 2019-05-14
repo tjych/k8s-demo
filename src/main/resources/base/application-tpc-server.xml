@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+
+
+    <!--定义tcp connector-->
+    <bean id="tcpConnector" class="com.sndks.ktv.im.connector.tcp.TcpConnector" init-method="init" destroy-method="destroy"/>
+
+    <!--定义tcp配置信息-->
+    <bean id="serverTransportConfig" class="com.sndks.ktv.im.connector.config.ServerTransportConfig">
+        <constructor-arg ref="tcpConnector"/>
+    </bean>
+
+    <!--tcp session管理-->
+    <bean id="tcpSessionManager" class="com.sndks.ktv.im.connector.tcp.TcpSessionManager">
+        <property name="maxInactiveInterval" value="500"/>
+        <property name="sessionListeners">
+            <list>
+                <ref bean="logSessionListener"/>
+            </list>
+        </property>
+    </bean>
+    <!--session 日志-->
+    <bean id="logSessionListener" class="com.sndks.ktv.im.connector.api.listener.LogSessionListener"/>
+
+
+
+</beans>
