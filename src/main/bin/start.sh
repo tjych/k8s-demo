@@ -29,7 +29,7 @@ COMMAND="java"
 MAIN_CLASS="com.firebird.k8s.demo.Launcher"
 JAVA_OPTS="-server -classpath "${CONF_DIR}:${LIB_DIR}/*" -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Dfile.encoding=UTF-8"
 #JAVA_MEM_OPTS="-Xmx2g -Xms2g -Xmn1024m -XX:MaxMetaspaceSize=128m -Xss512k -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:+UseFastAccessorMethods -XX:+UseCMSInitiatingOccupancyOnly"
-JAVA_MEM_OPTS="-Xmx128m -Xms128m -Xmn256m -XX:MaxMetaspaceSize=256m -Xss512k"
+JAVA_MEM_OPTS="-Xmx128m -Xms128m -Xmn256m -Xss512k"
 JAVA_GC_OPTS="-XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCApplicationStoppedTime -XX:+PrintGCApplicationConcurrentTime -Xloggc:${LOGS_DIR}/gc.log"
 
 JAVA_DEBUG_OPTS=""
