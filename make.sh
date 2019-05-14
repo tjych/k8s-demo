@@ -70,10 +70,10 @@ build(){
     imagename=$(grep "FROM " Dockerfile | awk '{print $2}');
     #pull下最新镜像
     docker pull ${imagename}
-    docker build -t ${NAMESPACE}/${ENV}_${GITPROJECTNAME}:latest -f Dockerfile .
+    docker build -t ${GITPROJECTNAME}:latest -f Dockerfile .
     #docker rmi ${NAMESPACE}/${ENV}_${GITPROJECTNAME}:latest
     #docker tag ${NAMESPACE}/${ENV}_${GITPROJECTNAME}:latest ${PUSHREOMTENAME}/${ENV}_${GITPROJECTNAME}:${TAG}
-    docker tag ${NAMESPACE}/${ENV}_${GITPROJECTNAME}:latest ${PUSHREOMTENAME}/${ENV}_${GITPROJECTNAME}:latest
+    docker tag ${GITPROJECTNAME}:latest ${PUSHREOMTENAME}/${GITPROJECTNAME}:latest
     cd ${WORKSPACE}
 }
 
@@ -85,7 +85,7 @@ push(){
     #pull下最新镜像
     docker pull ${imagename}
     #docker push ${PUSHREOMTENAME}/${ENV}_${GITPROJECTNAME}:${TAG}
-    docker push ${PUSHREOMTENAME}/${ENV}_${GITPROJECTNAME}:latest
+    docker push ${PUSHREOMTENAME}/${GITPROJECTNAME}:latest
     cd ${WORKSPACE}
 }
 
