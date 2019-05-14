@@ -1,4 +1,4 @@
-FROM java-centos:openjdk-7-jdk
+FROM java-centos:openjdk-8-jdk
 
 RUN mkdir -p /workspace/webapps/k8s-demo/webapps
 #COPY output /workspace/webapps/k8s-demo/webapps
