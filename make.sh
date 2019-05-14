@@ -44,8 +44,8 @@ compile(){
     echo "${pwd}"
     rm -rf ${OUTPUT_DIR}
     mvn clean package -Dmaven.test.skip=true -P ${ENV}
-    mv output/k8s-demo/* ./${OUTPUT_DIR}/
-    rm -rf output/k8s-demo
+    #mv output/k8s-demo/* ./${OUTPUT_DIR}/
+    #rm -rf output/k8s-demo
     #退出编译目录
     cd ${WORKSPACE}
 }
