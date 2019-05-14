@@ -1,4 +1,4 @@
-FROM nimmis/java-centos
+FROM java-centos:openjdk-7-jdk
 
 RUN mkdir -p /workspace/webapps/k8s-demo/webapps
 #COPY output /workspace/webapps/k8s-demo/webapps
