@@ -1,4 +1,4 @@
-FROM fabric8/java-centos-openjdk8-jdk
+FROM nimmis/java-centos
 
 RUN mkdir -p /workspace/webapps/k8s-demo/webapps
 #COPY output /workspace/webapps/k8s-demo/webapps
