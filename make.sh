@@ -9,7 +9,7 @@ WORKSPACE=$(cd `dirname $0`; pwd)
 
 #配置文件
 GITPROJECTNAME='k8s-demo'
-GITPATH="git@gitlab.com:tjych/${GITPROJECTNAME}.git"
+GITPATH="git@github.com:tjych/${GITPROJECTNAME}.git"
 COMPILE_DIR=${WORKSPACE}/compile
 OUTPUT_DIR="output"
 NAMESPACE="dev";
