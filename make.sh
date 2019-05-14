@@ -22,11 +22,11 @@ if [[ $# -ge 3 ]] ;then
 elif [[ $# -ge 2 ]] ;then
     ACTION=$1;
 	TAG=$2
-	ENV=dev
+	ENV=online
 elif [[ $# -ge 1 ]] ;then
     ACTION=$1;
 	TAG=master
-	ENV=dev
+	ENV=online
 else
     echo "Usage:compile|build|push TAG ENV instanceName";
  	exit 1;
