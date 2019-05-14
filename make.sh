@@ -71,8 +71,8 @@ build(){
     #pull下最新镜像
     docker pull ${imagename}
     docker build -t ${NAMESPACE}/${ENV}_${GITPROJECTNAME}:latest -f Dockerfile .
-    docker rmi ${PUSHREOMTENAME}/${ENV}_${GITPROJECTNAME}:latest
-    docker tag ${NAMESPACE}/${ENV}_${GITPROJECTNAME}:latest ${PUSHREOMTENAME}/${ENV}_${GITPROJECTNAME}:${TAG}
+    #docker rmi ${NAMESPACE}/${ENV}_${GITPROJECTNAME}:latest
+    #docker tag ${NAMESPACE}/${ENV}_${GITPROJECTNAME}:latest ${PUSHREOMTENAME}/${ENV}_${GITPROJECTNAME}:${TAG}
     docker tag ${NAMESPACE}/${ENV}_${GITPROJECTNAME}:latest ${PUSHREOMTENAME}/${ENV}_${GITPROJECTNAME}:latest
     cd ${WORKSPACE}
 }
@@ -84,7 +84,7 @@ push(){
     imagename=$(grep "FROM " Dockerfile | awk '{print $2}');
     #pull下最新镜像
     docker pull ${imagename}
-    docker push ${PUSHREOMTENAME}/${ENV}_${GITPROJECTNAME}:${TAG}
+    #docker push ${PUSHREOMTENAME}/${ENV}_${GITPROJECTNAME}:${TAG}
     docker push ${PUSHREOMTENAME}/${ENV}_${GITPROJECTNAME}:latest
     cd ${WORKSPACE}
 }
